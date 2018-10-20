@@ -15,7 +15,11 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.16.4",
-    "mysql2": "^1.6.1",
-    "nodemon": "^1.18.4"
+    "mysql2": "^1.6.1"
+  },
+  "devDependencies": {
+    "body-parser": "^1.18.3",
+    "nodemon": "^1.18.4",
+    "uuid": "^3.3.2"
   }
 }
