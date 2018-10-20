@@ -19,6 +19,8 @@
 		CDB625AE217BA9C3001FA3ED /* parentAccountTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB625AD217BA9C3001FA3ED /* parentAccountTableViewCell.swift */; };
 		CDB625B0217BABDD001FA3ED /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB625AF217BABDD001FA3ED /* Account.swift */; };
 		CDB625B2217BAD7C001FA3ED /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB625B1217BAD7C001FA3ED /* AccountViewController.swift */; };
+		CDB625B6217BB91A001FA3ED /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB625B5217BB91A001FA3ED /* Transaction.swift */; };
+		CDB625B8217BB9A4001FA3ED /* transactionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB625B7217BB9A4001FA3ED /* transactionTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +59,8 @@
 		CDB625AD217BA9C3001FA3ED /* parentAccountTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = parentAccountTableViewCell.swift; sourceTree = "<group>"; };
 		CDB625AF217BABDD001FA3ED /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
 		CDB625B1217BAD7C001FA3ED /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
+		CDB625B5217BB91A001FA3ED /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
+		CDB625B7217BB9A4001FA3ED /* transactionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = transactionTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,7 +117,9 @@
 				CDB625B1217BAD7C001FA3ED /* AccountViewController.swift */,
 				CDB6257E217BA58A001FA3ED /* Main.storyboard */,
 				CDB625AF217BABDD001FA3ED /* Account.swift */,
+				CDB625B5217BB91A001FA3ED /* Transaction.swift */,
 				CDB625AD217BA9C3001FA3ED /* parentAccountTableViewCell.swift */,
+				CDB625B7217BB9A4001FA3ED /* transactionTableViewCell.swift */,
 				CDB62584217BA591001FA3ED /* Assets.xcassets */,
 				CDB62586217BA591001FA3ED /* LaunchScreen.storyboard */,
 				CDB62589217BA591001FA3ED /* Info.plist */,
@@ -277,7 +283,9 @@
 				CDB625AC217BA8B3001FA3ED /* parentDashViewController.swift in Sources */,
 				CDB625AE217BA9C3001FA3ED /* parentAccountTableViewCell.swift in Sources */,
 				CDB6257B217BA58A001FA3ED /* AppDelegate.swift in Sources */,
+				CDB625B8217BB9A4001FA3ED /* transactionTableViewCell.swift in Sources */,
 				CDB625B0217BABDD001FA3ED /* Account.swift in Sources */,
+				CDB625B6217BB91A001FA3ED /* Transaction.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
