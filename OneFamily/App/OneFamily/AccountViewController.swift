@@ -8,14 +8,15 @@
 
 import UIKit
 
-class AccountViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-    
-    
-    @IBOutlet weak var accountNameLabel: UILabel!
+class AccountViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
     
     var account: Account?
     var request: String?
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var chartField: UITextField!
+    
+    let chartPicker = UIPickerView()
+    let charts = [String](arrayLiteral: "Graph 1", "Graph 2", "Graph 3")
     
     @IBAction func back(_ sender: UIBarButtonItem) {
         dismiss(animated: true, completion: nil)
@@ -27,10 +28,13 @@ class AccountViewController: UIViewController, UITableViewDataSource, UITableVie
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         
+        chartPicker.delegate = self
+        chartPicker.dataSource = self
         
-        accountNameLabel.text = account?.name
+        chartField.inputView = chartPicker
+        
+        self.title = account?.name
     }
     
     func showInputDialog() {
@@ -62,6 +66,24 @@ class AccountViewController: UIViewController, UITableViewDataSource, UITableVie
         
         //finally presenting the dialog box
         self.present(alertController, animated: true, completion: nil)
+    }
+    
+    //MARK: Picker View
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return charts.count
+    }
+    
+    func pickerView( _ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return charts[row]
+    }
+    
+    func pickerView( pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        chartField.text = charts[row]
     }
     
     //MARK: Table View
