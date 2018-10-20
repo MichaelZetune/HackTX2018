@@ -1,5 +1,5 @@
 //
-//  Account.swift
+//  File.swift
 //  OneFamily
 //
 //  Created by Turner Gregory on 10/20/18.
@@ -8,9 +8,9 @@
 
 import Foundation
 
-class Account {
+class Transaction {
     
-    var name: String?
-    var balance: String?
-    var transactions: [Transaction]?
+    var description: String?
+    var date: String?
+    var amount: String?
 }

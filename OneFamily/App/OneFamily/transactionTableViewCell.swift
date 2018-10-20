@@ -1,5 +1,5 @@
 //
-//  parentAccountTableViewCell.swift
+//  transactionTableViewCell.swift
 //  OneFamily
 //
 //  Created by Turner Gregory on 10/20/18.
@@ -8,10 +8,11 @@
 
 import UIKit
 
-class parentAccountTableViewCell: UITableViewCell {
+class transactionTableViewCell: UITableViewCell {
     
-    @IBOutlet weak var balanceLabel: UILabel!
-    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var amountLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
