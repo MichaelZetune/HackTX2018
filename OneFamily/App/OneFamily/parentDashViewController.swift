@@ -8,43 +8,58 @@
 
 import UIKit
 
-class parentDashViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class parentDashViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
-    var numAccounts = 3
     var accounts: [Account]?
     var selectedAccount: Account?
     
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var collection: UICollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        collection.delegate = self
+        collection.dataSource = self
+        
+        //preloading stuff cuz this is a hackathon
+        let account1 = Account()
+        account1.name = "Turner"
+        account1.balance = "3.50"
+        
+        let account2 = Account()
+        account2.name = "Chris"
+        account2.balance = "5.00"
+        
+        let account3 = Account()
+        account3.name = "Yashasvi"
+        account3.balance = "1000.00"
+        
+        accounts = [account1, account2, account3]
+        
+        collection.reloadData()
     }
     
-    //MARK: Table View methods
+    //MARK: Collection View
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return numAccounts
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return accounts?.count ?? 0
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        // Table view cells are reused and should be dequeued using a cell identifier.
-        let cellIdentifier = "cell"
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "accountCell", for: indexPath) as! parentAccountsCollectionViewCell
         
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? parentAccountTableViewCell else {
-            fatalError("The dequeued cell is not an instance of playlistTableViewCell.")
-        }
-        
-        // Fetches the appropriate item for the data source layout.
         let account = accounts?[indexPath.row]
         
+        cell.backgroundColor = UIColor.blue
+
         cell.nameLabel.text = account?.name
         cell.balanceLabel.text = account?.balance
         
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectedAccount = accounts?[indexPath.row]
         performSegue(withIdentifier: "parentViewAccount", sender: self)
     }
@@ -55,8 +70,9 @@ class parentDashViewController: UIViewController, UITableViewDelegate, UITableVi
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == "parentViewAccount" {
-            let dest = segue.destination as! AccountViewController
-            dest.account = selectedAccount!
+            let destinationNavigationController = segue.destination as! UINavigationController
+            let targetController = destinationNavigationController.topViewController as! AccountViewController
+            targetController.account = selectedAccount!
         }
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
