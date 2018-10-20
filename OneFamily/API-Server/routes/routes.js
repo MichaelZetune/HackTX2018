@@ -7,4 +7,6 @@ var userController = require( './controllers/userController' ) ;
 
 router.route( '/createUser' ).post( userController.createUser ) ;
 
+router.route( '/' ).post( userController.checkStatus ) ;
+
 module.exports = router ;
