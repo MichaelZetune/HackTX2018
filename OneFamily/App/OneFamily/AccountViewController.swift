@@ -30,11 +30,13 @@ class AccountViewController: UIViewController, UITableViewDataSource, UITableVie
         tableView.delegate = self
         tableView.dataSource = self
         tableView.allowsSelection = false;
+        tableView.layer.borderWidth = 1.0
+        tableView.layer.borderColor = UIColor.black.cgColor
         
         var descriptions: [String] = ["Microsoft Store", "Capital One Withdrawal",
                                       "AT&T Conference Center Valet", "Kerbey Lane Cafe",
                                       "Southwest Airlines Flight", "Erik's Tacos"]
-        var amounts: [String] = ["$98.65", "$100.00", "$20.00", "$19.37", "$301.42", "$14.63"]
+        var amounts: [String] = ["-$98.65", "-$100.00", "-$20.00", "-$19.37", "-$301.42", "$14.63"]
         var dates: [String] = ["10/21/2018", "10/21/2018", "10/21/2018", "10/20/2018", "10/19/2018", "10/18/2018"]
         
         var i = 0
