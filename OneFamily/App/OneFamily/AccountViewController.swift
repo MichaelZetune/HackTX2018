@@ -82,7 +82,7 @@ class AccountViewController: UIViewController, UITableViewDataSource, UITableVie
         return charts[row]
     }
     
-    func pickerView( pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+    func pickerView( _ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         chartField.text = charts[row]
     }
     
