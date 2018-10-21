@@ -30,13 +30,18 @@ class AccountViewController: UIViewController, UITableViewDataSource, UITableVie
         tableView.delegate = self
         tableView.dataSource = self
         
+        var descriptions: [String] = ["Microsoft Store", "Capital One Withdrawal",
+                                      "AT&T Conference Center Valet", "Kerbey Lane Cafe",
+                                      "Southwest Airlines Flight", "Fblthp's Martian Cafe"]
+        var amounts: [String] = ["$98.65", "$100.00", "$20.00", "$19.37", "$301.42", "$14.63"]
+        var dates: [String] = ["10/21/2018", "10/21/2018", "10/21/2018", "10/20/2018", "10/19/2018", "10/18/2018"]
+        
         var i = 0
-        while i < 10 {
+        while i < descriptions.count {
             let transaction = Transaction()
-            let s = String(i)
-            transaction.description = "description" + s
-            transaction.date = "date" + s
-            transaction.amount = "$amount" + s
+            transaction.description = descriptions[i]
+            transaction.date = dates[i]
+            transaction.amount = amounts[i]
             transactions.append(transaction)
             i = i + 1
         }

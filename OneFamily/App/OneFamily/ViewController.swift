@@ -11,11 +11,11 @@ import UIKit
 class ViewController: UIViewController {
     
     @IBAction func openParent(_ sender: UIButton) {
-        performSegue(withIdentifier: "logIn", sender: self)
+        //performSegue(withIdentifier: "logIn", sender: self)
     }
     
     @IBAction func openChild(_ sender: UIButton) {
-        performSegue(withIdentifier: "logIn", sender: self)
+        //performSegue(withIdentifier: "logIn", sender: self)
     }
     
     override func viewDidLoad() {
