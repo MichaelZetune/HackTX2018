@@ -8,15 +8,13 @@
 
 import UIKit
 
-class AccountViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
+class AccountViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     var account: Account?
+    var transactions: [Transaction] = []
     var request: String?
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var chartField: UITextField!
     
-    let chartPicker = UIPickerView()
-    let charts = [String](arrayLiteral: "Graph 1", "Graph 2", "Graph 3")
     
     @IBAction func back(_ sender: UIBarButtonItem) {
         dismiss(animated: true, completion: nil)
@@ -29,10 +27,21 @@ class AccountViewController: UIViewController, UITableViewDataSource, UITableVie
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        chartPicker.delegate = self
-        chartPicker.dataSource = self
+        tableView.delegate = self
+        tableView.dataSource = self
         
-        chartField.inputView = chartPicker
+        var i = 0
+        while i < 10 {
+            let transaction = Transaction()
+            let s = String(i)
+            transaction.description = "description" + s
+            transaction.date = "date" + s
+            transaction.amount = "$amount" + s
+            transactions.append(transaction)
+            i = i + 1
+        }
+        
+        account?.transactions = transactions
         
         self.title = account?.name
     }
@@ -66,24 +75,6 @@ class AccountViewController: UIViewController, UITableViewDataSource, UITableVie
         
         //finally presenting the dialog box
         self.present(alertController, animated: true, completion: nil)
-    }
-    
-    //MARK: Picker View
-    
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return charts.count
-    }
-    
-    func pickerView( _ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return charts[row]
-    }
-    
-    func pickerView( _ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        chartField.text = charts[row]
     }
     
     //MARK: Table View
