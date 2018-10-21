@@ -34,7 +34,7 @@ class parentDashViewController: UIViewController, UICollectionViewDelegate, UICo
         //preloading stuff cuz this is a hackathon
         
         var names: [String] = ["Turner", "Yashasvi", "Chris", "Peter", "Michael"]
-        var balances: [String] = ["$1.00", "$1.00", "$1.00", "$1.00", "$1.00"]
+        var balances: [String] = ["$473.18", "$596.15", "$472.18", "$2.50", "$1009.08"]
         
         var i = 0
         while i < names.count {
@@ -68,7 +68,7 @@ class parentDashViewController: UIViewController, UICollectionViewDelegate, UICo
         cell.layer.cornerRadius = 10
         
         let gradientLayer = CAGradientLayer()
-        gradientLayer.colors = [UIColor.blue.cgColor, UIColor.gray.cgColor]
+        gradientLayer.colors = [UIColor.lightGray.cgColor, UIColor.white.cgColor]
         gradientLayer.startPoint = CGPoint(x: 0, y: 0)
         gradientLayer.endPoint = CGPoint(x: 1, y: 1)
         gradientLayer.frame = cell.bounds
