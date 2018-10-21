@@ -3,54 +3,50 @@ var sql = require( '../../db' ) ;
 const uuidv1 = require( 'uuid/v1' ) ;
 
 module.exports =
+{
+    checkStatus : function( req, res )
     {
-        checkStatus : function( req, res )
-        {
-            res.send( "Endpoint is good!" ) ;
-        },
+        res.send( "Endpoint is good!" ) ;
+    },
 
-        createParent : function( req, res )
+    createParent : function( req, res )
+    {
+        if ( sql )
         {
-            if ( sql )
+            var balance = req.body.balance;
+            var uid = req.body.uid;
+            var pid     = uuidv1() ;
+
+            //Verify parameters
+            if ( balance && uid && pid )
             {
-                var email           = req.body.email ;
-                var passwordHash    = req.body.passwordHash ;
-                var userType        = req.body.userType ;
-                var uid             = null ; //Generate this later
-
-                //Verify parameters
-                if ( email && passwordHash && userType )
+                try
                 {
-                    //Generate UID
-                    uid = uuidv1() ;
+                    sql.query( 'INSERT INTO parent (pid, uid, balance) VALUES (?, ?, ?);',
+                        [ pid, uid, balance ],
+                        function( err, results, fields )
+                        {
+                            if ( err )
+                                throw err ;
 
-                    try
-                    {
-                        sql.query( 'INSERT INTO user (email, passwordHash, userType, uid) VALUES (?, ?, ?, ?);',
-                            [ email, passwordHash, userType, uid ],
-                            function( err, results, fields )
-                            {
-                                if ( err )
-                                    throw err ;
+                            res.send(
+                                {
+                                    "code": 200,
+                                    "msg": "Successfully inserted parent into database."
+                                } ) ;
+                        } ) ;
+                }
 
-                                res.send(
-                                    {
-                                        "code": 200,
-                                        "msg": "Successfully inserted user into database."
-                                    } ) ;
-                            } ) ;
-                    }
-
-                    catch ( err )
-                    {
-                        //Server error
-                        res.status( 500 ).send(
-                            {
-                                "msg": "Could not add user into database!"
-                            } ) ;
-                    }
+                catch ( err )
+                {
+                    //Server error
+                    res.status( 500 ).send(
+                        {
+                            "msg": "Could not add parent into database!"
+                        } ) ;
                 }
             }
-        },
+        }
+    },
 
-    } ;
+} ;
