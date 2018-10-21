@@ -10,10 +10,18 @@ import UIKit
 
 class parentDashViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
-    var accounts: [Account]?
+    //var accounts: [Account]?
+    var accounts: [Account] = []
     var selectedAccount: Account?
     
     @IBOutlet weak var collection: UICollectionView!
+    
+    var layout: UICollectionViewFlowLayout = {
+        let layout = UICollectionViewFlowLayout()
+        //let width = UIScreen.main.bounds.size.width
+        layout.estimatedItemSize = CGSize(width: 340, height: 100)
+        return layout
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,20 +29,24 @@ class parentDashViewController: UIViewController, UICollectionViewDelegate, UICo
         collection.delegate = self
         collection.dataSource = self
         
+        collection?.collectionViewLayout = layout
+        
         //preloading stuff cuz this is a hackathon
-        let account1 = Account()
-        account1.name = "Turner"
-        account1.balance = "3.50"
         
-        let account2 = Account()
-        account2.name = "Chris"
-        account2.balance = "5.00"
+        var names: [String] = ["Turner", "Yashasvi", "Chris", "Peter", "Michael"]
+        var balances: [String] = ["$1.00", "$1.00", "$1.00", "$1.00", "$1.00"]
         
-        let account3 = Account()
-        account3.name = "Yashasvi"
-        account3.balance = "1000.00"
+        var i = 0
+        while i < names.count {
+            let account = Account()
+            account.name = names[i]
+            account.balance = balances[i]
+            accounts.append(account)
+            i = i + 1
+        }
         
-        accounts = [account1, account2, account3]
+        //collection.backgroundColor = UIColor.cyan
+        //self.view.backgroundColor = UIColor.cyan
         
         collection.reloadData()
     }
@@ -42,25 +54,36 @@ class parentDashViewController: UIViewController, UICollectionViewDelegate, UICo
     //MARK: Collection View
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return accounts?.count ?? 0
+        return accounts.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "accountCell", for: indexPath) as! parentAccountsCollectionViewCell
         
-        let account = accounts?[indexPath.row]
+        let account = accounts[indexPath.row]
         
         cell.backgroundColor = UIColor.blue
-
-        cell.nameLabel.text = account?.name
-        cell.balanceLabel.text = account?.balance
+        cell.layer.masksToBounds = true
+        cell.layer.cornerRadius = 10
+        
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.colors = [UIColor.blue.cgColor, UIColor.gray.cgColor]
+        gradientLayer.startPoint = CGPoint(x: 0, y: 0)
+        gradientLayer.endPoint = CGPoint(x: 1, y: 1)
+        gradientLayer.frame = cell.bounds
+        cell.layer.insertSublayer(gradientLayer, at: 0)
+        
+        cell.nameLabel.text = account.name
+        cell.nameLabel.textColor = UIColor.white
+        cell.balanceLabel.text = account.balance
+        cell.balanceLabel.textColor = UIColor.white
         
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        selectedAccount = accounts?[indexPath.row]
+        selectedAccount = accounts[indexPath.row]
         performSegue(withIdentifier: "parentViewAccount", sender: self)
     }
 
@@ -77,5 +100,7 @@ class parentDashViewController: UIViewController, UICollectionViewDelegate, UICo
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
     }
+    
+    
 
 }
