@@ -15,6 +15,8 @@ class createAccountViewController: UIViewController {
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var confirmField: UITextField!
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
