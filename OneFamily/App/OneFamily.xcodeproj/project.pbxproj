@@ -23,6 +23,7 @@
 		CDB625BC217BC5E3001FA3ED /* createAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB625BB217BC5E2001FA3ED /* createAccountViewController.swift */; };
 		CDB625BE217BC74F001FA3ED /* childLogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB625BD217BC74F001FA3ED /* childLogInViewController.swift */; };
 		CDB625C0217BCC7E001FA3ED /* parentAccountsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB625BF217BCC7E001FA3ED /* parentAccountsCollectionViewCell.swift */; };
+		CDB625C2217CC545001FA3ED /* chartsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB625C1217CC545001FA3ED /* chartsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +66,7 @@
 		CDB625BB217BC5E2001FA3ED /* createAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = createAccountViewController.swift; sourceTree = "<group>"; };
 		CDB625BD217BC74F001FA3ED /* childLogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = childLogInViewController.swift; sourceTree = "<group>"; };
 		CDB625BF217BCC7E001FA3ED /* parentAccountsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = parentAccountsCollectionViewCell.swift; sourceTree = "<group>"; };
+		CDB625C1217CC545001FA3ED /* chartsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = chartsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +124,7 @@
 				CDB625BB217BC5E2001FA3ED /* createAccountViewController.swift */,
 				CDB625BD217BC74F001FA3ED /* childLogInViewController.swift */,
 				CDB6257E217BA58A001FA3ED /* Main.storyboard */,
+				CDB625C1217CC545001FA3ED /* chartsViewController.swift */,
 				CDB625BF217BCC7E001FA3ED /* parentAccountsCollectionViewCell.swift */,
 				CDB625AF217BABDD001FA3ED /* Account.swift */,
 				CDB625B5217BB91A001FA3ED /* Transaction.swift */,
@@ -288,6 +291,7 @@
 				CDB625B2217BAD7C001FA3ED /* AccountViewController.swift in Sources */,
 				CDB625BE217BC74F001FA3ED /* childLogInViewController.swift in Sources */,
 				CDB625AC217BA8B3001FA3ED /* parentDashViewController.swift in Sources */,
+				CDB625C2217CC545001FA3ED /* chartsViewController.swift in Sources */,
 				CDB6257B217BA58A001FA3ED /* AppDelegate.swift in Sources */,
 				CDB625BC217BC5E3001FA3ED /* createAccountViewController.swift in Sources */,
 				CDB625C0217BCC7E001FA3ED /* parentAccountsCollectionViewCell.swift in Sources */,

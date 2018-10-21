@@ -29,10 +29,11 @@ class AccountViewController: UIViewController, UITableViewDataSource, UITableVie
         
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.allowsSelection = false;
         
         var descriptions: [String] = ["Microsoft Store", "Capital One Withdrawal",
                                       "AT&T Conference Center Valet", "Kerbey Lane Cafe",
-                                      "Southwest Airlines Flight", "Fblthp's Martian Cafe"]
+                                      "Southwest Airlines Flight", "Erik's Tacos"]
         var amounts: [String] = ["$98.65", "$100.00", "$20.00", "$19.37", "$301.42", "$14.63"]
         var dates: [String] = ["10/21/2018", "10/21/2018", "10/21/2018", "10/20/2018", "10/19/2018", "10/18/2018"]
         
@@ -49,6 +50,11 @@ class AccountViewController: UIViewController, UITableViewDataSource, UITableVie
         account?.transactions = transactions
         
         self.title = account?.name
+        
+        
+        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipeGesture))
+        swipeLeft.direction = UISwipeGestureRecognizer.Direction.left
+        self.view.addGestureRecognizer(swipeLeft)
     }
     
     func showInputDialog() {
@@ -110,7 +116,36 @@ class AccountViewController: UIViewController, UITableViewDataSource, UITableVie
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 75
     }
-
+    
+    @objc func respondToSwipeGesture(gesture: UIGestureRecognizer) {
+        
+        print ("Swiped Left")
+        
+        if let swipeGesture = gesture as? UISwipeGestureRecognizer {
+            
+            switch swipeGesture.direction {
+                
+            case UISwipeGestureRecognizer.Direction.left:
+                
+                
+                //change view controllers
+                
+                let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                
+                let resultViewController = storyBoard.instantiateViewController(withIdentifier: "chartsViewController") as! chartsViewController
+                
+                let transition = CATransition()
+                transition.duration = 0.25
+                transition.type = CATransitionType.push
+                transition.subtype = CATransitionSubtype.fromRight
+                self.view.window!.layer.add(transition, forKey: kCATransition)
+                present(resultViewController, animated: false)
+                
+            default:
+                break
+            }
+        }
+    }
     /*
     // MARK: - Navigation
 
