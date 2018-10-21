@@ -15,6 +15,7 @@ class AccountViewController: UIViewController, UITableViewDataSource, UITableVie
     var request: String?
     @IBOutlet weak var tableView: UITableView!
     
+    @IBOutlet weak var balanceLabel: UILabel!
     
     @IBAction func back(_ sender: UIBarButtonItem) {
         dismiss(animated: true, completion: nil)
@@ -33,11 +34,42 @@ class AccountViewController: UIViewController, UITableViewDataSource, UITableVie
         tableView.layer.borderWidth = 1.0
         tableView.layer.borderColor = UIColor.black.cgColor
         
+        addTransaction(x: 0)
+        
+        self.title = account?.name
+        
+        
+        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipeGesture))
+        swipeLeft.direction = UISwipeGestureRecognizer.Direction.left
+        self.view.addGestureRecognizer(swipeLeft)
+    }
+    /*
+    func clearTable() {
+        account?.transactions = nil
+        let indexPath = IndexPath(item: 0, section: 0)
+        tableView.deleteRows(at: [indexPath], with: .fade)
+        tableView.reloadData()
+    }
+    */
+    func addTransaction(x: Int) {
+        
+        //account?.transactions = nil
+        
         var descriptions: [String] = ["Microsoft Store", "Capital One Withdrawal",
                                       "AT&T Conference Center Valet", "Kerbey Lane Cafe",
                                       "Southwest Airlines Flight", "Erik's Tacos"]
         var amounts: [String] = ["-$98.65", "-$100.00", "-$20.00", "-$19.37", "-$301.42", "$14.63"]
         var dates: [String] = ["10/21/2018", "10/21/2018", "10/21/2018", "10/20/2018", "10/19/2018", "10/18/2018"]
+        
+        if x == 1 {
+            descriptions = ["Account Deposit", "Microsoft Store", "Capital One Withdrawal",
+                                          "AT&T Conference Center Valet", "Kerbey Lane Cafe",
+                                          "Southwest Airlines Flight", "Erik's Tacos"]
+            amounts = ["+$50.00", "-$98.65", "-$100.00", "-$20.00", "-$19.37", "-$301.42", "$14.63"]
+            dates = ["10/21/2018", "10/21/2018", "10/21/2018", "10/21/2018", "10/20/2018", "10/19/2018", "10/18/2018"]
+        }
+        
+        
         
         var i = 0
         while i < descriptions.count {
@@ -51,12 +83,7 @@ class AccountViewController: UIViewController, UITableViewDataSource, UITableVie
         
         account?.transactions = transactions
         
-        self.title = account?.name
-        
-        
-        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipeGesture))
-        swipeLeft.direction = UISwipeGestureRecognizer.Direction.left
-        self.view.addGestureRecognizer(swipeLeft)
+        tableView.reloadData()
     }
     
     func showInputDialog() {
@@ -69,6 +96,11 @@ class AccountViewController: UIViewController, UITableViewDataSource, UITableVie
             
             //getting the input values from user
             self.request = (alertController.textFields?[0].text)!
+            
+            self.balanceLabel.text = "$646.15"
+            
+            //self.addTransaction(x: 1)
+            
             
             //self.performSegue(withIdentifier: "addList", sender: nil)
         }
@@ -111,6 +143,13 @@ class AccountViewController: UIViewController, UITableViewDataSource, UITableVie
         cell.descriptionLabel.text = transaction?.description
         cell.dateLabel.text = transaction?.date
         cell.amountLabel.text = transaction?.amount
+        /*
+        if(transaction?.amount == "+$50.00") {
+            cell.amountLabel.textColor = UIColor.green
+        } else {
+            cell.amountLabel.textColor = UIColor.red
+        }
+        */
         
         return cell
     }
