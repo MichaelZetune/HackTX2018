@@ -7,7 +7,7 @@ module.exports =
     checkStatus : function( req, res )
     {
         res.send( "Endpoint is good!" ) ;
-    }
+    },
 
     createUser : function( req, res )
     {
