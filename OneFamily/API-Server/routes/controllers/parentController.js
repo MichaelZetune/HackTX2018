@@ -4,34 +4,29 @@ const uuidv1 = require( 'uuid/v1' ) ;
 
 module.exports =
 {
-    checkStatus : function( req, res )
-    {
-        res.send( "Endpoint is good!" ) ;
-    },
-
     createParent : function( req, res )
     {
         if ( sql )
         {
-            var balance = req.body.balance;
-            var uid = req.body.uid;
-            var pid     = uuidv1() ;
+            var pid     = uuidv1() ; //parent id
+
+            var uid     = req.body.uid ; //user id
+            var balance = req.body.balance ;
 
             //Verify parameters
-            if ( balance && uid && pid )
+            if ( pid && uid && balance )
             {
                 try
                 {
                     sql.query( 'INSERT INTO parent (pid, uid, balance) VALUES (?, ?, ?);',
                         [ pid, uid, balance ],
-                        function( err, results, fields )
+                        function( err )
                         {
                             if ( err )
                                 throw err ;
 
-                            res.send(
+                            res.status( 200 ).send(
                                 {
-                                    "code": 200,
                                     "msg": "Successfully inserted parent into database."
                                 } ) ;
                         } ) ;

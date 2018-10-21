@@ -3,115 +3,108 @@ var sql = require( '../../db' ) ;
 const uuidv1 = require( 'uuid/v1' ) ;
 
 module.exports =
+{
+    createUser : function( req, res )
     {
-        checkStatus : function( req, res )
+        if ( sql )
         {
-            res.send( "Endpoint is good!" ) ;
-        },
+            var email           = req.body.email ;
+            var passwordHash    = req.body.passwordHash ;
+            var userType        = req.body.userType ;
+            var uid             = null ; //Generate this later
 
-        createUser : function( req, res )
-        {
-            if ( sql )
+            //Verify parameters
+            if ( email && passwordHash && userType )
             {
-                var email           = req.body.email ;
-                var passwordHash    = req.body.passwordHash ;
-                var userType        = req.body.userType ;
-                var uid             = null ; //Generate this later
+                //Generate UID
+                uid = uuidv1() ;
 
-                //Verify parameters
-                if ( email && passwordHash && userType )
+                try
                 {
-                    //Generate UID
-                    uid = uuidv1() ;
+                    sql.query( 'INSERT INTO user (email, passwordHash, userType, uid) VALUES (?, ?, ?, ?);',
+                        [ email, passwordHash, userType, uid ],
+                        function( err )
+                        {
+                            if ( err )
+                                throw err ;
 
-                    try
-                    {
-                        sql.query( 'INSERT INTO user (email, passwordHash, userType, uid) VALUES (?, ?, ?, ?);',
-                            [ email, passwordHash, userType, uid ],
-                            function( err, results, fields )
-                            {
-                                if ( err )
-                                    throw err ;
+                            res.status( 200 ).send(
+                                {
+                                    "msg": "Successfully inserted user into database."
+                                } ) ;
+                        } ) ;
+                }
 
-                                res.send(
-                                    {
-                                        "code": 200,
-                                        "msg": "Successfully inserted user into database."
-                                    } ) ;
-                            } ) ;
-                    }
-
-                    catch ( err )
-                    {
-                        //Server error
-                        res.status( 500 ).send(
-                            {
-                                "msg": "Could not add user into database!"
-                            } ) ;
-                    }
+                catch ( err )
+                {
+                    //Server error
+                    res.status( 500 ).send(
+                        {
+                            "msg": "Could not add user into database!"
+                        } ) ;
                 }
             }
-        },
+        }
+    },
 
-        login : function( req, res )
+    login : function( req, res )
+    {
+        if ( sql )
         {
-            if ( sql )
+            var email           = req.body.email ;
+            var passwordHash    = req.body.passwordHash ;
+
+            if ( email && passwordHash )
             {
-                var email           = req.body.email ;
-                var passwordHash    = req.body.passwordHash ;
-
-                if ( email && passwordHash )
+                try
                 {
-                    try
-                    {
-                        sql.query( 'SELECT * FROM user WHERE email = ?',
-                            [ email ],
-                            function( err, results, fields )
+                    sql.query( 'SELECT * FROM user WHERE email = ?',
+                        [ email ],
+                        function( err, results )
+                        {
+                            if ( err )
+                                throw err ;
+
+                            else
                             {
-                                if ( err )
-                                    throw err ;
-
-                                else
+                                if ( results.length === 1 )
                                 {
-                                    if ( results.length === 1 )
+                                    if ( results[0].passwordHash === passwordHash )
                                     {
-                                        if ( results[0].passwordHash === passwordHash )
-                                        {
-                                            res.send(
-                                                {
-                                                    "code": 200,
-                                                    "msg": "Successfully logged in as " + email
-                                                } ) ;
-                                        }
-
-                                        else
-                                        {
-                                            res.status( 500 ).send(
-                                                {
-                                                    "msg": "password hashes do not match."
-                                                } ) ;
-                                        }
+                                        res.status( 200 ).send(
+                                            {
+                                                "msg": "Successfully logged in as " + email
+                                            } ) ;
                                     }
 
                                     else
                                     {
                                         res.status( 500 ).send(
                                             {
-                                                "msg": "there is more than 1 user with email " + email
+                                                "msg": "Password hashes do not match."
                                             } ) ;
                                     }
                                 }
-                            } );
-                    }
 
-                    catch ( err )
-                    {
-                        res.status( 500 ).send(
-                            {
-                                "msg": "Could not login: " + err
-                            } ) ;
-                    }
+                                else
+                                {
+                                    res.status( 500 ).send(
+                                        {
+                                            "msg": "There is more than 1 user with email " + email
+                                        } ) ;
+                                }
+                            }
+                        } );
+                }
+
+                catch ( err )
+                {
+                    res.status( 500 ).send(
+                        {
+                            "msg": "Could not login: " + err
+                        } ) ;
                 }
             }
         }
-    } ;
+    }
+} ;

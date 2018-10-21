@@ -1,0 +1,3 @@
+1. Rename trans_date to transDate
+2. Rename approved to pending
+3. Make sure everything is using same name conventions (camelcase)
