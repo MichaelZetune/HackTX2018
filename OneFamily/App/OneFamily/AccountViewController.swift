@@ -119,7 +119,7 @@ class AccountViewController: UIViewController, UITableViewDataSource, UITableVie
     
     @objc func respondToSwipeGesture(gesture: UIGestureRecognizer) {
         
-        print ("Swiped Left")
+        //print ("Swiped Left")
         
         if let swipeGesture = gesture as? UISwipeGestureRecognizer {
             

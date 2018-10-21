@@ -20,7 +20,7 @@ class chartsViewController: UIViewController {
     
     @objc func respondToSwipeGesture(gesture: UIGestureRecognizer) {
         
-        print ("Swiped Right")
+        //print ("Swiped Right")
         
         if let swipeGesture = gesture as? UISwipeGestureRecognizer {
             
@@ -31,7 +31,7 @@ class chartsViewController: UIViewController {
                 
                 //change view controllers
                 
-                let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+                //let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
                 
                 let transition = CATransition()
                 transition.duration = 0.25
